@@ -1,2 +1,2 @@
-# flask_csv_to_geojson
+# csv to GeoJSON
 Flask application for converting csv file to GeoJSON.

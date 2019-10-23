@@ -1,0 +1,291 @@
+{%extends "index.html"%}
+
+{% block content_text %}
+	 <div class="col-sm-12 col-lg-4 mr-auto ml-auto border p-4 mb-4">
+        <form action="{{url_for('csv_text')}}" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+
+                <label><strong>Upload Files</strong></label>
+                <div class="custom-file">
+                    <input type="file" name="file" class="custom-file-input" id="customFile">
+                    <label class="custom-file-label" for="customFile">Choose file</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label><strong>Choose type of icons</strong></label>
+                <select id="select_icon" name="icon" class="custom-select" onchange="iconImg()">
+                    <option selected>Choose icon type</option>
+                    <option value="aerialway">aerialway</option>
+                    <option value="airfield">airfield</option>
+                    <option value="airport">airport</option>
+                    <option value="alcohol-shop">alcohol-shop</option>
+                    <option value="america-football">america-football</option>
+                    <option value="art-gallery">art-gallery</option>
+                    <option value="bakery">bakery</option>
+                    <option value="bank">bank</option>
+                    <option value="bar">bar</option>
+                    <option value="baseball">baseball</option>
+                    <option value="basketball">basketball</option>
+                    <option value="beer">beer</option>
+                    <option value="bicycle">bicycle</option>
+                    <option value="building">building</option>
+                    <option value="bus">bus</option>
+                    <option value="cafe">cafe</option>
+                    <option value="camera">camera</option>
+                    <option value="campsite">campsite</option>
+                    <option value="car">car</option>
+                    <option value="cemetery">cemetery</option>
+                    <option value="chemist">chemist</option>
+                    <option value="cinema">cinema</option>
+                    <option value="circle">circle</option>
+                    <option value="circle-stroked">circle-stroked</option>
+                    <option value="city">city</option>
+                    <option value="clothing-store">clothing-store</option>
+                    <option value="college">college</option>
+                    <option value="commercial">commercial</option>
+                    <option value="cricket">cricket</option>
+                    <option value="cross">cross</option>
+                    <option value="dam">dam</option>
+                    <option value="danger">danger</option>
+                    <option value="dentist">dentist</option>
+                    <option value="disability">disability</option>
+                    <option value="dog-park">dog-park</option>
+                    <option value="embassy">embassy</option>
+                    <option value="emergency-telephone">emergency-telephone</option>
+                    <option value="entrance">entrance</option>
+                    <option value="farm">farm</option>
+                    <option value="fast-food">fast-food</option>
+                    <option value="ferry">ferry</option>
+                    <option value="fire-station">fire-station</option>
+                    <option value="fuel">fuel</option>
+                    <option value="garden">garden</option>
+                    <option value="gift">gift</option>
+                    <option value="golf">golf</option>
+                    <option value="grocery">grocery</option>
+                    <option value="hairdresser">hairdresser</option>
+                    <option value="harbor">harbor</option>
+                    <option value="heart">heart</option>
+                    <option value="heliport">heliport</option>
+                    <option value="hospital">hospital</option>
+                    <option value="ice-cream">ice-cream</option>
+                    <option value="industrial">industrial</option>
+                    <option value="land-use">land-use</option>
+                    <option value="laundry">laundry</option>
+                    <option value="library">library</option>
+                    <option value="lighthouse">lighthouse</option>
+                    <option value="lodging">lodging</option>
+                    <option value="logging">logging</option>
+                    <option value="london-underground">london-underground</option>
+                    <option value="marker">marker</option>
+                    <option value="marker-stroked">marker-stroked</option>
+                    <option value="minefield">minefield</option>
+                    <option value="mobilephone">mobilephone</option>
+                    <option value="monument">monument</option>
+                    <option value="museum">museum</option>
+                    <option value="music">music</option>
+                    <option value="oil-well">oil-well</option>
+                    <option value="park">park</option>
+                    <option value="parking">parking</option>
+                    <option value="parking-garage">parking-garage</option>
+                    <option value="pharmacy">pharmacy</option>
+                    <option value="pitch">pitch</option>
+                    <option value="place-of-worship">place-of-worship</option>
+                    <option value="playground">playground</option>
+                    <option value="police">police</option>
+                    <option value="polling-place">polling-place</option>
+                    <option value="post">post</option>
+                    <option value="prison">prison</option>
+                    <option value="rail">rail</option>
+                    <option value="rail-above">rail-above</option>
+                    <option value="rail-light">rail-light</option>
+                    <option value="rail-metro">rail-metro</option>
+                    <option value="rail-underground">rail-underground</option>
+                    <option value="religious-christian">religious-christian</option>
+                    <option value="religious-jewish">religious-jewish</option>
+                    <option value="religious-muslim">religious-muslim</option>
+                    <option value="restaurant">restaurant</option>
+                    <option value="roadblock">roadblock</option>
+                    <option value="rocket">rocket</option>
+                    <option value="school">school</option>
+                    <option value="scooter">scooter</option>
+                    <option value="shop">shop</option>
+                    <option value="skiing">skiing</option>
+                    <option value="slaughterhouse">slaughterhouse</option>
+                    <option value="soccer">soccer</option>
+                    <option value="square">square</option>
+                    <option value="square-stroked">square-stroked</option>
+                    <option value="star">star</option>
+                    <option value="star-stroked">star-stroked</option>
+                    <option value="suitcase">suitcase</option>
+                    <option value="swimming">swimming</option>
+                    <option value="telephone">telephone</option>
+                    <option value="tennis">tennis</option>
+                    <option value="theatre">theatre</option>
+                    <option value="toilets">toilets</option>
+                    <option value="town">town</option>
+                    <option value="town-hall">town-hall</option>
+                    <option value="triangle">triangle</option>
+                    <option value="triangle-stroked">triangle-stroked</option>
+                    <option value="village">village</option>
+                    <option value="warehouse">warehouse</option>
+                    <option value="waste-basket">waste-basket</option>
+                    <option value="water">water</option>
+                    <option value="wetland">wetland</option>
+                    <option value="zoo">zoo</option>
+                </select>
+                <div id="icon"></div>
+            </div>
+
+            <div class="form-group">
+                <label><strong>Choose color of icons</strong></label>
+                <input type="color" name="color" class="form-control" id="exampleInputColor1" type="submit" value="Upload">
+            </div>
+			
+			{% block content_error %}{% endblock %}
+			
+            <div class="form-group">
+                <button type="submit" value="upload" class="btn btn-block btn-dark">
+					<i class="fa fa-fw fa-upload"></i> Upload
+				</button>
+            </div>
+        </form>
+    </div>
+	
+	<script>
+        $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+
+        var iconLinks = {
+            aerialway: "https://upload.wikimedia.org/wikipedia/commons/a/a4/Maki2-aerialway-18.svg",
+            airfield: "https://upload.wikimedia.org/wikipedia/commons/3/3a/Maki2-airfield-18.svg",
+            airport: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Maki2-airport-18.svg",
+            alcohol_shop: "https://upload.wikimedia.org/wikipedia/commons/1/16/Maki2-alcohol-shop-18.svg",
+            america_football: "https://upload.wikimedia.org/wikipedia/commons/d/d6/Maki2-america-football-18.svg",
+            art_gallery: "https://upload.wikimedia.org/wikipedia/commons/2/26/Maki2-art-gallery-18.svg",
+            bakery: "https://upload.wikimedia.org/wikipedia/commons/8/8e/Maki2-bakery-18.svg",
+            bank: "https://upload.wikimedia.org/wikipedia/commons/4/4a/Maki2-bank-18.svg",
+            bar: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Maki2-bar-18.svg",
+            baseball: "https://upload.wikimedia.org/wikipedia/commons/a/a4/Maki2-baseball-18.svg",
+            basketball: "https://upload.wikimedia.org/wikipedia/commons/6/6f/Maki2-basketball-18.svg",
+            beer: "https://upload.wikimedia.org/wikipedia/commons/8/8b/Maki2-beer-18.svg",
+            bicycle: "https://upload.wikimedia.org/wikipedia/commons/4/48/Maki2-bicycle-18.svg",
+            building: "https://upload.wikimedia.org/wikipedia/commons/7/7e/Maki2-building-18.svg",
+            bus: "https://upload.wikimedia.org/wikipedia/commons/9/93/Maki2-bus-18.svg",
+            cafe: "https://upload.wikimedia.org/wikipedia/commons/8/8f/Maki2-cafe-18.svg",
+            camera: "https://upload.wikimedia.org/wikipedia/commons/c/c8/Maki2-camera-18.svg",
+            campsite: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Maki2-campsite-18.svg",
+            car: "https://upload.wikimedia.org/wikipedia/commons/d/da/Maki2-car-18.svg",
+            cemetery: "https://upload.wikimedia.org/wikipedia/commons/7/7d/Maki2-cemetery-18.svg",
+            chemist: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Maki2-chemist-18.svg",
+            cinema: "https://upload.wikimedia.org/wikipedia/commons/e/ec/Maki2-cinema-18.svg",
+            circle: "https://upload.wikimedia.org/wikipedia/commons/7/78/Maki2-circle-18.svg",
+            circle_stroked: "https://upload.wikimedia.org/wikipedia/commons/7/72/Maki2-circle-stroked-18.svg",
+            city: "https://upload.wikimedia.org/wikipedia/commons/f/f4/Maki2-city-18.svg",
+            clothing_store: "https://upload.wikimedia.org/wikipedia/commons/4/4c/Maki2-clothing-store-18.svg",
+            college: "https://upload.wikimedia.org/wikipedia/commons/3/3c/Maki2-college-18.svg",
+            commercial: "https://upload.wikimedia.org/wikipedia/commons/1/19/Maki2-commercial-18.svg",
+            cricket: "https://upload.wikimedia.org/wikipedia/commons/5/5c/Maki2-cricket-18.svg",
+            cross: "https://upload.wikimedia.org/wikipedia/commons/4/4b/Maki2-cross-18.svg",
+            dam: "https://upload.wikimedia.org/wikipedia/commons/e/e8/Maki2-dam-18.svg",
+            danger: "https://upload.wikimedia.org/wikipedia/commons/b/b4/Maki2-danger-18.svg",
+            dentist: "https://upload.wikimedia.org/wikipedia/commons/d/da/Maki2-dentist-18.svg",
+            disability: "https://upload.wikimedia.org/wikipedia/commons/5/55/Maki2-disability-18.svg",
+            dog_park: "https://upload.wikimedia.org/wikipedia/commons/f/f4/Maki2-dog-park-18.svg",
+            embassy: "https://upload.wikimedia.org/wikipedia/commons/2/23/Maki2-embassy-18.svg",
+            emergency_telephone: "https://upload.wikimedia.org/wikipedia/commons/8/8b/Maki2-emergency-telephone-18.svg",
+            entrance: "https://upload.wikimedia.org/wikipedia/commons/d/d2/Maki2-entrance-18.svg",
+            farm: "https://upload.wikimedia.org/wikipedia/commons/2/29/Maki2-farm-18.svg",
+            fast_food: "https://upload.wikimedia.org/wikipedia/commons/9/92/Maki2-fast-food-18.svg",
+            ferry: "https://upload.wikimedia.org/wikipedia/commons/0/0b/Maki2-ferry-18.svg",
+            fire_station: "https://upload.wikimedia.org/wikipedia/commons/2/2d/Maki2-fire-station-18.svg",
+            fuel: "https://upload.wikimedia.org/wikipedia/commons/e/e5/Maki2-fuel-18.svg",
+            garden: "https://upload.wikimedia.org/wikipedia/commons/2/26/Maki2-garden-18.svg",
+            gift: "https://upload.wikimedia.org/wikipedia/commons/6/69/Maki2-gift-18.svg",
+            golf: "https://upload.wikimedia.org/wikipedia/commons/4/4a/Maki2-golf-18.svg",
+            grocery: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Maki2-grocery-18.svg",
+            hairdresser: "https://upload.wikimedia.org/wikipedia/commons/2/2d/Maki2-hairdresser-18.svg",
+            harbor: "https://upload.wikimedia.org/wikipedia/commons/9/91/Maki2-harbor-18.svg",
+            heart: "https://upload.wikimedia.org/wikipedia/commons/b/bc/Maki2-heart-18.svg",
+            heliport: "https://upload.wikimedia.org/wikipedia/commons/0/0e/Maki2-heliport-18.svg",
+            hospital: "https://upload.wikimedia.org/wikipedia/commons/e/e9/Maki2-hospital-18.svg",
+            ice_cream: "https://upload.wikimedia.org/wikipedia/commons/7/74/Maki2-ice-cream-18.svg",
+            industrial: "https://upload.wikimedia.org/wikipedia/commons/0/0a/Maki2-industrial-18.svg",
+            land_use: "https://upload.wikimedia.org/wikipedia/commons/a/aa/Maki2-land-use-18.svg",
+            laundry: "https://upload.wikimedia.org/wikipedia/commons/9/94/Maki2-laundry-18.svg",
+            library: "https://upload.wikimedia.org/wikipedia/commons/b/b4/Maki2-library-18.svg",
+            lighthouse: "https://upload.wikimedia.org/wikipedia/commons/8/83/Maki2-lighthouse-18.svg",
+            lodging: "https://upload.wikimedia.org/wikipedia/commons/e/ee/Maki2-lodging-18.svg",
+            logging: "https://upload.wikimedia.org/wikipedia/commons/e/e6/Maki2-logging-18.svg",
+            london_underground: "https://upload.wikimedia.org/wikipedia/commons/a/a6/Maki2-london-underground-18.svg",
+            marker: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Maki2-marker-18.svg",
+            marker_stroked: "https://upload.wikimedia.org/wikipedia/commons/2/22/Maki2-marker-stroked-18.svg",
+            minefield: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Maki2-minefield-18.svg",
+            mobilephone: "https://upload.wikimedia.org/wikipedia/commons/f/f5/Maki2-mobilephone-18.svg",
+            monument: "https://upload.wikimedia.org/wikipedia/commons/f/fb/Maki2-monument-18.svg",
+            museum: "https://upload.wikimedia.org/wikipedia/commons/3/3b/Maki2-museum-18.svg",
+            music: "https://upload.wikimedia.org/wikipedia/commons/e/ee/Maki2-music-18.svg",
+            oil_well: "https://upload.wikimedia.org/wikipedia/commons/1/13/Maki2-oil-well-18.svg",
+            park: "https://upload.wikimedia.org/wikipedia/commons/d/d6/Maki2-park-18.svg",
+            parking: "https://upload.wikimedia.org/wikipedia/commons/1/13/Maki2-parking-18.svg",
+            parking_garage: "https://upload.wikimedia.org/wikipedia/commons/a/a8/Maki2-parking-garage-18.svg",
+            pharmacy: "https://upload.wikimedia.org/wikipedia/commons/8/86/Maki2-pharmacy-18.svg",
+            pitch: "https://upload.wikimedia.org/wikipedia/commons/f/f2/Maki2-pitch-18.svg",
+            place_of_worship: "https://upload.wikimedia.org/wikipedia/commons/e/e4/Maki2-place-of-worship-18.svg",
+            playground: "https://upload.wikimedia.org/wikipedia/commons/b/b1/Maki2-playground-18.svg",
+            police: "https://upload.wikimedia.org/wikipedia/commons/4/4f/Maki2-police-18.svg",
+            polling_place: "https://upload.wikimedia.org/wikipedia/commons/d/dd/Maki2-polling-place-18.svg",
+            post: "https://upload.wikimedia.org/wikipedia/commons/7/7a/Maki2-post-18.svg",
+            prison: "https://upload.wikimedia.org/wikipedia/commons/0/05/Maki2-prison-18.svg",
+            rail: "https://upload.wikimedia.org/wikipedia/commons/9/97/Maki2-rail-18.svg",
+            rail_above: "https://upload.wikimedia.org/wikipedia/commons/9/98/Maki2-rail-above-18.svg",
+            rail_light: "https://upload.wikimedia.org/wikipedia/commons/5/58/Maki2-rail-light-18.svg",
+            rail_metro: "https://upload.wikimedia.org/wikipedia/commons/1/1c/Maki2-rail-metro-18.svg",
+            rail_underground: "https://upload.wikimedia.org/wikipedia/commons/e/e2/Maki2-rail-underground-18.svg",
+            religious_christian: "https://upload.wikimedia.org/wikipedia/commons/9/90/Maki2-religious-christian-18.svg",
+            religious_jewish: "https://upload.wikimedia.org/wikipedia/commons/0/0a/Maki2-religious-jewish-18.svg",
+            religious_muslim: "https://upload.wikimedia.org/wikipedia/commons/c/c7/Maki2-religious-muslim-18.svg",
+            restaurant: "https://upload.wikimedia.org/wikipedia/commons/8/8b/Maki2-restaurant-18.svg",
+            roadblock: "https://upload.wikimedia.org/wikipedia/commons/d/d3/Maki2-roadblock-18.svg",
+            rocket: "https://upload.wikimedia.org/wikipedia/commons/8/8c/Maki2-rocket-18.svg",
+            school: "https://upload.wikimedia.org/wikipedia/commons/c/c6/Maki2-school-18.svg",
+            scooter: "https://upload.wikimedia.org/wikipedia/commons/f/fe/Maki2-scooter-18.svg",
+            shop: "https://upload.wikimedia.org/wikipedia/commons/8/86/Maki2-shop-18.svg",
+            skiing: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Maki2-skiing-18.svg",
+            slaughterhouse: "https://upload.wikimedia.org/wikipedia/commons/1/1e/Maki2-slaughterhouse-18.svg",
+            soccer: "https://upload.wikimedia.org/wikipedia/commons/0/0e/Maki2-soccer-18.svg",
+            square: "https://upload.wikimedia.org/wikipedia/commons/2/26/Maki2-square-18.svg",
+            square_stroked: "https://upload.wikimedia.org/wikipedia/commons/8/89/Maki2-square-stroked-18.svg",
+            star: "https://upload.wikimedia.org/wikipedia/commons/b/b0/Maki2-star-18.svg",
+            star_stroked: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Maki2-star-stroked-18.svg",
+            suitcase: "https://upload.wikimedia.org/wikipedia/commons/6/68/Maki2-suitcase-18.svg",
+            swimming: "https://upload.wikimedia.org/wikipedia/commons/2/21/Maki2-swimming-18.svg",
+            telephone: "https://upload.wikimedia.org/wikipedia/commons/9/9f/Maki2-telephone-18.svg",
+            tennis: "https://upload.wikimedia.org/wikipedia/commons/2/28/Maki2-tennis-18.svg",
+            theatre: "https://upload.wikimedia.org/wikipedia/commons/2/21/Maki2-theatre-18.svg",
+            toilets: "https://upload.wikimedia.org/wikipedia/commons/d/d4/Maki2-toilets-18.svg",
+            town: "https://upload.wikimedia.org/wikipedia/commons/1/16/Maki2-town-18.svg",
+            town_hall: "https://upload.wikimedia.org/wikipedia/commons/e/ef/Maki2-town-hall-18.svg",
+            triangle: "https://upload.wikimedia.org/wikipedia/commons/6/64/Maki2-triangle-18.svg",
+            triangle_stroked: "https://upload.wikimedia.org/wikipedia/commons/a/a3/Maki2-triangle-stroked-18.svg",
+            village: "https://upload.wikimedia.org/wikipedia/commons/3/3c/Maki2-village-18.svg",
+            warehouse: "https://upload.wikimedia.org/wikipedia/commons/9/96/Maki2-warehouse-18.svg",
+            waste_basket: "https://upload.wikimedia.org/wikipedia/commons/8/8a/Maki2-waste-basket-18.svg",
+            water: "https://upload.wikimedia.org/wikipedia/commons/e/e6/Maki2-water-18.svg",
+            wetland: "https://upload.wikimedia.org/wikipedia/commons/7/74/Maki2-wetland-18.svg",
+            zoo: "https://upload.wikimedia.org/wikipedia/commons/0/02/Maki2-zoo-18.svg"
+        };
+
+        function iconImg() {
+            document.querySelector('#icon').innerHTML = "You chose <b>" + document.getElementById("select_icon").value + "</b>: ";
+
+            const image = document.createElement('img');
+            image.setAttribute('src', iconLinks[document.getElementById("select_icon").value.replace(/-/g, "_")]);
+            image.setAttribute('width', '20');
+            image.setAttribute('height', '20');
+            document.querySelector('#icon').append(image);
+        }
+    </script>
+{% endblock %}

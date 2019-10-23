@@ -1,0 +1,169 @@
+{%extends "index.html"%}
+
+{% block content_text %}
+	<br>
+	<h4 class="text-center">Table preview</h4>
+	<hr>
+		<div class="container-fluid" style="max-width: 90vw">
+		<table class="table table-bordered table-hover" style="table-layout:fixed;word-wrap:break-word;">
+			<tbody>
+				<tr class="table-success text-center text-secondary">
+					<th>item</th>
+					<th>item label</th>
+					<th>page in Wikipedia</th>
+					<th>image</th>
+					<th>latitude</th>
+					<th>longitude</th>
+				</tr>
+				
+				{%for i in range(len)%}
+					<tr>
+						<td class="align-middle text-center"><a href="{{item[i]}}">{{itemName[i]}}</a></td>
+						<td class="align-middle text-center">{{itemLabel[i]}}</td>
+						<td class="align-middle text-center">
+							{% if page[i]!='nan' %}
+								{{page[i]}}
+							{% else %}
+								<b>Няма страница</b>
+							{% endif %}
+						</td>
+						<td class="align-middle text-center">
+							{% if image[i]!='nan' %}
+								<img class="mx-auto d-block img-fluid" src="{{image[i]}}" />
+							{% else %}
+								<b>Няма изображение</b>
+							{% endif %}
+						</td>
+						<td class="align-middle text-center">{{latitude[i]}}</td>
+						<td class="align-middle text-center">{{longitude[i]}}</td>
+					</tr>
+				{%endfor%}
+
+			</tbody>
+		</table>
+	</div> 
+{% endblock %}
+
+{% block content_json %}
+	<br><br><br>
+	<h4 class="text-center">JSON code</h4>
+	<div class="container-fluid" style="max-width: 90vw">
+		<div class="container-fluid">
+			<div id="btn-group">
+				<button class="btn btn-outline-primary" onclick="beauty()">Beautifier</button>
+				<button class="btn btn-outline-success" onclick="mini()">Minifier</button>
+				<button class="btn btn-outline-secondary" onclick="copy()">Copy text</button>
+			</div> 
+		</div>
+		<hr>
+		<pre id="json" class="pre-scrollable" style="max-height: 650px;">{{json_text}}</pre>
+	</div> 
+	<script>
+		var json = document.getElementById('json');
+		var obj = JSON.parse(json.innerText);
+		var text = JSON.stringify(obj, undefined, 2);
+		json.innerHTML = JSONstringify(text);
+
+		function mini(){
+			text = JSON.stringify(obj, undefined, 0);
+			json.innerHTML = JSONstringify(text);
+		}
+
+		function beauty(){
+			text = JSON.stringify(obj, undefined, 2);
+			json.innerHTML = JSONstringify(text);
+		}
+
+		function copy(){
+		  const textArea = document.createElement('textarea');
+		  textArea.textContent = text;
+		  document.body.append(textArea);
+		  
+		  textArea.select();
+		  document.execCommand("copy");
+		  
+		  var elem = document.querySelector('textarea');
+		  elem.parentNode.removeChild(elem);
+		}
+
+		function JSONstringify(json) {
+			json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+			return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+				var cls = 'number';
+				if (/^"/.test(match)) {
+					if (/:$/.test(match)) {
+						cls = 'key';
+					} else {
+						cls = 'string';
+					}
+				} else if (/true|false/.test(match)) {
+					cls = 'boolean';
+				} else if (/null/.test(match)) {
+					cls = 'null';
+				}
+				return '<span class="' + cls + '">' + match + '</span>';
+			});
+		}
+	</script>
+{% endblock %}
+
+{% block map_json %}
+<br><br><br>
+<h4 class="text-center">Map preview</h4>
+<hr>
+<div class="container-fluid border border-secondary" style="max-width: 90vw" id='map'></div>
+
+<script>	
+	   var jsonData = {{ json_map|tojson }};
+	   var jsonObj = JSON.parse(jsonData);
+	   
+		var map = L.map('map').setView([{{lonMean}}, {{latMean}}], 7);
+
+        L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png', {
+            attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia</a>',
+            minZoom: 1,
+            maxZoom: 19
+        }).addTo(map);
+
+        let points = L.layerGroup().addTo(map);
+        
+        function onEachFeature(feature, layer) {
+            var text = '<p class="text-center h6" ><b>' + feature.properties.title + '</b></p>';
+			
+			if(feature.properties.description!=""){
+				text+='<img src="'+feature.properties.description+'" width="200px"/>';
+			}
+
+            layer.bindPopup(text, {
+                maxWidth: 760
+            });
+                        
+            points.addLayer(layer);
+        }
+
+        L.geoJSON(jsonObj, {
+            style: function(feature) {
+                return feature.properties && feature.properties.style;
+            },
+
+            onEachFeature: onEachFeature,
+
+            pointToLayer: function(feature, latlng) {
+                return L.circleMarker(latlng, {
+                    radius: 8,
+                    fillColor: "#cc0000",
+                    color: "#000",
+                    weight: 1,
+                    opacity: 0.7,
+                    fillOpacity: 0.8
+                });
+            }
+        });
+</script>
+{% endblock %}
+
+{%block back_button%}
+	<button class="btn btn-outline-danger" onclick="window.location.href='{{url_for('index')}}';">
+		<i class="fa fa-chevron-left"></i> Back
+	</button>
+{%endblock%}

@@ -10,6 +10,7 @@ A simple Flask application built with [Flask](https://flask.palletsprojects.com/
 ## Features
 
 - Converting csv file to GeoJSON
+- Showing data on a table
 - Preview of the coordinates on a map
 - Beautify and minimize GeoJSON
 
@@ -17,3 +18,5 @@ A simple Flask application built with [Flask](https://flask.palletsprojects.com/
 
 - Flesk
 - Vanilla JavaScript
+- Bootstrap
+- Leaflet

@@ -30,14 +30,22 @@ The first step is to go to [Wikidata Query Service](https://query.wikidata.org/)
 
 ```SPARQL
 SELECT DISTINCT ?item ?itemLabel ?page_title ?image ?coordinate_location WHERE {
-  ?item (wdt:P31/(wdt:P279*)) wd:Q2232001;
+
+  ?item (wdt:P31/(wdt:P279*)) wd:Q2232001; 
          wdt:P17 wd:Q219.
-  ?article schema:about ?item ; schema:isPartOf <https://bg.wikipedia.org/> ;  schema:name ?page_title .
+         
+  ?article schema:about ?item; 
+           schema:isPartOf <https://bg.wikipedia.org/>;  
+           schema:name ?page_title .
+           
   ?item rdfs:label ?LabelBG filter (lang(?LabelBG) = "bg") .
+  
   OPTIONAL { ?item wdt:P18 ?image. }
   OPTIONAL { ?item wdt:P625 ?coordinate_location. }
+  
   MINUS { ?item wdt:P576 _:b1. }
   SERVICE wikibase:label { bd:serviceParam wikibase:language "bg". }
+  
 }ORDER BY (?itemLabel)
 ```
 The columns must be named: **item | itemLabel | page_title | image | coordinate_location** and when the date is ready for use is exported to CSV file.
